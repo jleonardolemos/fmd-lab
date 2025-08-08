@@ -8,7 +8,7 @@
  
 @task('update-code')
     cd lab
-    git pull origin main
+    git pull origin master
 @endtask
  
 @task('install-dependencies')
