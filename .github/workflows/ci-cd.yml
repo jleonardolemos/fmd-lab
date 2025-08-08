@@ -29,6 +29,7 @@ jobs:
   deploy:
     needs: validation
     runs-on: ubuntu-latest
+    container: convenia/php-full:latest
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +38,6 @@ jobs:
 
       - name: Deploy
         run: |
-          apt-get update -y && apt-get install openssh-client -y
           echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_FMD_LAB }}" | tr -d '\r' | ssh-add -
