@@ -39,6 +39,9 @@ jobs:
         run: composer install
 
       - name: Generate App Key
+        run: cp .env.example .env
+
+      - name: Generate App Key
         run: php artisan key:generate
 
       - name: Run PHPUnit
