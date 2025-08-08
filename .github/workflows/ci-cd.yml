@@ -32,6 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: composer install --no-dev --no-interaction
+
       - name: Deploy
         run: |
           eval $(ssh-agent -s)
