@@ -1,0 +1,38 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          
+      - name: Install dependencies
+        run: composer install
+        
+      - name: Run Pint (check only)
+        run: ./vendor/bin/pint --test
+        
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan analyse app
+
+  deploy:
+    needs: validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: |
+          echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SSH_FMD_LAB }}" | tr -d '\r' | ssh-add -
+          ./vendor/bin/envoy run deploy
