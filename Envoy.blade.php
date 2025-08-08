@@ -1,4 +1,4 @@
-@servers(['web' => ['ubuntu@54.197.38.215']])
+@servers(['web' => ['ubuntu@54.197.38.215']], ['options' => '-o StrictHostKeyChecking=no'])
  
 @story('deploy')
     update-code
