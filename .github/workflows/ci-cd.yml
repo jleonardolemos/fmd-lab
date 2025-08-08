@@ -37,6 +37,7 @@ jobs:
 
       - name: Deploy
         run: |
+          sudo echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_FMD_LAB }}" | tr -d '\r' | ssh-add -
           ./vendor/bin/envoy run deploy
