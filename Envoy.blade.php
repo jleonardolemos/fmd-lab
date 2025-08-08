@@ -1,4 +1,4 @@
-@servers(['web' => ['ubuntu@54.197.38.215']])
+@servers(['web' => ['ubuntu@3.95.19.8']])
  
 @story('deploy')
     update-code
