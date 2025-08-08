@@ -30,6 +30,7 @@ jobs:
     needs: validation
     runs-on: ubuntu-latest
     container: convenia/php-full:latest
+    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
 
