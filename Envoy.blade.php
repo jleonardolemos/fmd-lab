@@ -13,7 +13,7 @@
  
 @task('install-dependencies')
     cd lab
-    composer install --no-dev
+    composer install --no-dev --ignore-platform-reqs
 @endtask
 
 @task('run-migrations')
