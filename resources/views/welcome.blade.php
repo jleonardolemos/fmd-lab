@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Top 10 Boxers</title>
+  <title>Top 10 Boxers at F&MD Lab</title>
   <style>
     body {
       background-color: #121212;
