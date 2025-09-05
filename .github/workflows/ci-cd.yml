@@ -22,21 +22,3 @@ jobs:
         
       - name: Run PHPStan
         run: ./vendor/bin/phpstan analyse app
-
-  deploy:
-    needs: validation
-    runs-on: ubuntu-latest
-    container: convenia/php-full:latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: composer install --no-dev --no-interaction
-
-      - name: Deploy
-        run: |
-          echo StrictHostKeyChecking no >> /etc/ssh/ssh_config
-          eval $(ssh-agent -s)
-          echo "${{ secrets.SSH_FMD_LAB }}" | tr -d '\r' | ssh-add -
-          ./vendor/bin/envoy run deploy
