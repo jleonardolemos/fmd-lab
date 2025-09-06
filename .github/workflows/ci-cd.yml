@@ -23,8 +23,9 @@ jobs:
       - name: Run PHPStan
         run: ./vendor/bin/phpstan analyse app
 
-  tests:
+  test:
     runs-on: ubuntu-latest
+    needs: static_analysis
     steps:
       - uses: actions/checkout@v4
       
@@ -36,12 +37,8 @@ jobs:
       - name: Install dependencies
         run: composer install
         
-      - name: Run Pint (check only)
-        run: cp .env.example .env
-
-      - name: Run Pint (check only)
+      - name: Generate app key
         run: php artisan key:generate
         
       - name: Run PHPUnit
-        run: ./vendor/bin/phpunit --coverage-text --colors=never
-        
+        run: ./vendor/bin/phpunit
